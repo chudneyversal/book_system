@@ -1,0 +1,62 @@
+<?php
+session_start();
+include 'config.php';
+
+// Fetch books with author and category
+$stmt = $pdo->query("SELECT b.BookID, b.Title, b.Price, b.Stock, a.Name AS Author, c.CategoryName FROM Books b JOIN Authors a ON b.AuthorID = a.AuthorID JOIN Categories c ON b.CategoryID = c.CategoryID");
+$books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Book Store</h1>
+        <nav>
+            <a href="index.php">Home</a>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <a href="user_dashboard.php">Dashboard</a>
+                <a href="cart.php">Cart</a>
+                <a href="logout.php">Logout</a>
+            <?php else: ?>
+                <a href="login.php">Login</a>
+                <a href="register.php">Register</a>
+            <?php endif; ?>
+            <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin'): ?>
+                <a href="admin_dashboard.php">Admin</a>
+            <?php endif; ?>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Available Books</h2>
+        <div class="books">
+            <?php foreach ($books as $book): ?>
+                <div class="book">
+                    <h3><?php echo htmlspecialchars($book['Title']); ?></h3>
+                    <p>Author: <?php echo htmlspecialchars($book['Author']); ?></p>
+                    <p>Category: <?php echo htmlspecialchars($book['CategoryName']); ?></p>
+                    <p>Price: $<?php echo htmlspecialchars($book['Price']); ?></p>
+                    <p>Stock: <?php echo htmlspecialchars($book['Stock']); ?></p>
+                    <a href="book_details.php?id=<?php echo $book['BookID']; ?>">View Details</a>
+                    <form action="add_to_cart.php" method="post">
+                        <input type="hidden" name="book_id" value="<?php echo $book['BookID']; ?>">
+                        <input type="number" name="quantity" value="1" min="1" max="<?php echo $book['Stock']; ?>">
+                        <button type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Book Store</p>
+    </footer>
+</body>
+</html>
