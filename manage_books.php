@@ -16,11 +16,11 @@ $categories = $pdo->query("SELECT * FROM Categories")->fetchAll(PDO::FETCH_ASSOC
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($action == 'add') {
-        $stmt = $pdo->prepare("INSERT INTO Books (Title, AuthorID, CategoryID, Price, PublishedDate, Stock) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$_POST['title'], $_POST['author_id'], $_POST['category_id'], $_POST['price'], $_POST['published_date'], $_POST['stock']]);
+        $stmt = $pdo->prepare("INSERT INTO Books (Title, AuthorID, CategoryID, Price, PublishedDate, Stock, Image) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$_POST['title'], $_POST['author_id'], $_POST['category_id'], $_POST['price'], $_POST['published_date'], $_POST['stock'], $_POST['image']]);
     } elseif ($action == 'edit' && $id) {
-        $stmt = $pdo->prepare("UPDATE Books SET Title=?, AuthorID=?, CategoryID=?, Price=?, PublishedDate=?, Stock=? WHERE BookID=?");
-        $stmt->execute([$_POST['title'], $_POST['author_id'], $_POST['category_id'], $_POST['price'], $_POST['published_date'], $_POST['stock'], $id]);
+        $stmt = $pdo->prepare("UPDATE Books SET Title=?, AuthorID=?, CategoryID=?, Price=?, PublishedDate=?, Stock=?, Image=? WHERE BookID=?");
+        $stmt->execute([$_POST['title'], $_POST['author_id'], $_POST['category_id'], $_POST['price'], $_POST['published_date'], $_POST['stock'], $_POST['image'], $id]);
     } elseif ($action == 'delete' && $id) {
         $stmt = $pdo->prepare("DELETE FROM Books WHERE BookID=?");
         $stmt->execute([$id]);
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit;
 }
 
-$books = $pdo->query("SELECT b.*, a.Name AS Author, c.CategoryName FROM Books b JOIN Authors a ON b.AuthorID = a.AuthorID JOIN Categories c ON b.CategoryID = c.CategoryID")->fetchAll(PDO::FETCH_ASSOC);
+$books = $pdo->query("SELECT b.*, a.Name AS Author, c.CategoryName FROM Books b JOIN Authors a ON b.AuthorID = a.AuthorID JOIN Categories c ON b.CategoryID = c.CategoryID ORDER BY b.BookID DESC")->fetchAll(PDO::FETCH_ASSOC);
 
 $book = null;
 if ($action == 'edit' && $id) {
@@ -116,6 +116,9 @@ if ($action == 'edit' && $id) {
                 <label for="stock">Stock:</label>
                 <input type="number" id="stock" name="stock" value="<?php echo $book['Stock'] ?? ''; ?>" required>
 
+                <label for="image">Image URL:</label>
+                <input type="text" id="image" name="image" value="<?php echo $book['Image'] ?? ''; ?>" placeholder="e.g., images/book1.jpg">
+
                 <button type="submit"><?php echo ucfirst($action); ?> Book</button>
             </form>
             <div class="manage-buttons">
@@ -125,7 +128,7 @@ if ($action == 'edit' && $id) {
     </main>
 
     <footer>
-        <p>&copy; 2025 Book Store</p>
+        <p>&copy; 2025, booksandpleased. </p>
     </footer>
 </body>
 </html>

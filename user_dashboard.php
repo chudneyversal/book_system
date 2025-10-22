@@ -20,7 +20,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
+    <title>Your Dashboard</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -61,7 +61,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <td>
                                 <?php
                                 $stmt_items = $pdo->prepare("SELECT oi.*, b.Title FROM OrderItems oi JOIN Books b ON oi.BookID = b.BookID WHERE oi.OrderID = ?");
-                                $stmt_items->execute([$order['OrderID']]);
+                                        $stmt_items->execute([$order['OrderID']]);
                                 $items = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
                                 ?>
                                 <ul>
