@@ -80,7 +80,9 @@ if ($action == 'edit' && $id) {
             <p class="error"><?php echo $error; ?></p>
         <?php endif; ?>
         <?php if ($action == 'list'): ?>
-            <a href="manage_categories.php?action=add">Add New Category</a>
+            <div class="manage-buttons">
+                <button onclick="window.location.href='manage_categories.php?action=add'">Add New Category</button>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -93,7 +95,7 @@ if ($action == 'edit' && $id) {
                         <tr>
                             <td><?php echo htmlspecialchars($c['CategoryName']); ?></td>
                             <td>
-                                <a href="manage_categories.php?action=edit&id=<?php echo $c['CategoryID']; ?>">Edit</a>
+                                <button onclick="window.location.href='manage_categories.php?action=edit&id=<?php echo $c['CategoryID']; ?>'">Edit</button>
                                 <form action="manage_categories.php?action=delete&id=<?php echo $c['CategoryID']; ?>" method="post" style="display:inline;" onsubmit="return confirm('Are you sure?')">
                                     <button type="submit">Delete</button>
                                 </form>
@@ -109,7 +111,9 @@ if ($action == 'edit' && $id) {
 
                 <button type="submit"><?php echo ucfirst($action); ?> Category</button>
             </form>
-            <a href="manage_categories.php">Back to List</a>
+            <div class="manage-buttons">
+                <button onclick="window.location.href='manage_categories.php'">Back to List</button>
+            </div>
         <?php endif; ?>
     </main>
 

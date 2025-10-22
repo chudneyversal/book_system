@@ -280,6 +280,48 @@ footer p {
     box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 
+.manage-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.manage-buttons button {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #E0AA3E 0%, #3B3B58 100%);
+    color: #1E1E2E;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.manage-buttons button:hover {
+    background: linear-gradient(135deg, #3B3B58 0%, #1E1E2E 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+table td button {
+    padding: 6px 12px;
+    margin: 2px;
+    background: linear-gradient(135deg, #E0AA3E 0%, #3B3B58 100%);
+    color: #1E1E2E;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+table td button:hover {
+    background: linear-gradient(135deg, #3B3B58 0%, #1E1E2E 100%);
+    transform: scale(1.05);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     header h1 {

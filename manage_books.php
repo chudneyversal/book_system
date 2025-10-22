@@ -58,7 +58,9 @@ if ($action == 'edit' && $id) {
 
     <main>
         <?php if ($action == 'list'): ?>
-            <a href="manage_books.php?action=add">Add New Book</a>
+            <div class="manage-buttons">
+                <button onclick="window.location.href='manage_books.php?action=add'">Add New Book</button>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -79,8 +81,8 @@ if ($action == 'edit' && $id) {
                             <td>$<?php echo htmlspecialchars($b['Price']); ?></td>
                             <td><?php echo htmlspecialchars($b['Stock']); ?></td>
                             <td>
-                                <a href="manage_books.php?action=edit&id=<?php echo $b['BookID']; ?>">Edit</a>
-                                <a href="manage_books.php?action=delete&id=<?php echo $b['BookID']; ?>" onclick="return confirm('Are you sure?')">Delete</a>
+                                <button onclick="window.location.href='manage_books.php?action=edit&id=<?php echo $b['BookID']; ?>'">Edit</button>
+                                <button onclick="if(confirm('Are you sure?')) window.location.href='manage_books.php?action=delete&id=<?php echo $b['BookID']; ?>'">Delete</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -116,7 +118,9 @@ if ($action == 'edit' && $id) {
 
                 <button type="submit"><?php echo ucfirst($action); ?> Book</button>
             </form>
-            <a href="manage_books.php">Back to List</a>
+            <div class="manage-buttons">
+                <button onclick="window.location.href='manage_books.php'">Back to List</button>
+            </div>
         <?php endif; ?>
     </main>
 

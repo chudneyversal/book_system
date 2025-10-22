@@ -80,7 +80,9 @@ if ($action == 'edit' && $id) {
             <p class="error"><?php echo $error; ?></p>
         <?php endif; ?>
         <?php if ($action == 'list'): ?>
-            <a href="manage_authors.php?action=add">Add New Author</a>
+            <div class="manage-buttons">
+                <button onclick="window.location.href='manage_authors.php?action=add'">Add New Author</button>
+            </div>
             <table>
                 <thead>
                     <tr>
@@ -97,7 +99,7 @@ if ($action == 'edit' && $id) {
                             <td><?php echo htmlspecialchars($a['Bio']); ?></td>
                             <td><?php echo htmlspecialchars($a['BirthDate']); ?></td>
                             <td>
-                                <a href="manage_authors.php?action=edit&id=<?php echo $a['AuthorID']; ?>">Edit</a>
+                                <button onclick="window.location.href='manage_authors.php?action=edit&id=<?php echo $a['AuthorID']; ?>'">Edit</button>
                                 <form action="manage_authors.php?action=delete&id=<?php echo $a['AuthorID']; ?>" method="post" style="display:inline;" onsubmit="return confirm('Are you sure?')">
                                     <button type="submit">Delete</button>
                                 </form>
@@ -119,7 +121,9 @@ if ($action == 'edit' && $id) {
 
                 <button type="submit"><?php echo ucfirst($action); ?> Author</button>
             </form>
-            <a href="manage_authors.php">Back to List</a>
+            <div class="manage-buttons">
+                <button onclick="window.location.href='manage_authors.php'">Back to List</button>
+            </div>
         <?php endif; ?>
     </main>
 
