@@ -1,1 +1,5 @@
-- [x] Move the admin link from the conditional nav block to the always-visible nav section in index.php, keeping it conditional on admin role.
+- [x] Add Font Awesome for icons
+- [x] Add icons to navigation links
+- [x] Add decorative background pattern to body
+- [x] Add glowing effects to buttons
+- [x] Add decorative borders to main content
