@@ -58,9 +58,6 @@ if ($action == 'edit' && $id) {
 
     <main>
         <?php if ($action == 'list'): ?>
-            <div class="manage-buttons">
-                <button onclick="window.location.href='manage_books.php?action=add'">Add New Book</button>
-            </div>
             <table>
                 <thead>
                     <tr>
@@ -88,6 +85,9 @@ if ($action == 'edit' && $id) {
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <div class="manage-buttons" style="margin-top: 20px;">
+                <button onclick="window.location.href='manage_books.php?action=add'">Add New Book</button>
+            </div>
         <?php elseif ($action == 'add' || $action == 'edit'): ?>
             <form action="manage_books.php?action=<?php echo $action; ?><?php if ($id) echo '&id=' . $id; ?>" method="post">
                 <label for="title">Title:</label>

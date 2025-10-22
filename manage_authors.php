@@ -80,9 +80,6 @@ if ($action == 'edit' && $id) {
             <p class="error"><?php echo $error; ?></p>
         <?php endif; ?>
         <?php if ($action == 'list'): ?>
-            <div class="manage-buttons">
-                <button onclick="window.location.href='manage_authors.php?action=add'">Add New Author</button>
-            </div>
             <table>
                 <thead>
                     <tr>
@@ -108,6 +105,9 @@ if ($action == 'edit' && $id) {
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <div class="manage-buttons" style="margin-top: 20px;">
+                <button onclick="window.location.href='manage_authors.php?action=add'">Add New Author</button>
+            </div>
         <?php elseif ($action == 'add' || $action == 'edit'): ?>
             <form action="manage_authors.php?action=<?php echo $action; ?><?php if ($id) echo '&id=' . $id; ?>" method="post">
                 <label for="name">Name:</label>

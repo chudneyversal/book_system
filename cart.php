@@ -57,6 +57,7 @@ $total = array_sum(array_column($cart_items, 'total'));
                         <th>Title</th>
                         <th>Price</th>
                         <th>Quantity</th>
+                        <th>New Quantity</th>
                         <th>Total</th>
                         <th>Actions</th>
                     </tr>
@@ -67,11 +68,13 @@ $total = array_sum(array_column($cart_items, 'total'));
                             <td><?php echo htmlspecialchars($item['title']); ?></td>
                             <td>$<?php echo htmlspecialchars($item['price']); ?></td>
                             <td><?php echo htmlspecialchars($item['quantity']); ?></td>
+                            <td>
+                                <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="0" form="update-form-<?php echo $item['id']; ?>">
+                            </td>
                             <td>$<?php echo htmlspecialchars($item['total']); ?></td>
                             <td>
-                                <form action="update_cart.php" method="post" style="display:inline;">
+                                <form id="update-form-<?php echo $item['id']; ?>" action="update_cart.php" method="post" style="display:inline;">
                                     <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
-                                    <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="0">
                                     <button type="submit">Update</button>
                                 </form>
                                 <form action="remove_from_cart.php" method="post" style="display:inline;">

@@ -80,9 +80,6 @@ if ($action == 'edit' && $id) {
             <p class="error"><?php echo $error; ?></p>
         <?php endif; ?>
         <?php if ($action == 'list'): ?>
-            <div class="manage-buttons">
-                <button onclick="window.location.href='manage_categories.php?action=add'">Add New Category</button>
-            </div>
             <table>
                 <thead>
                     <tr>
@@ -104,6 +101,9 @@ if ($action == 'edit' && $id) {
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <div class="manage-buttons" style="margin-top: 20px;">
+                <button onclick="window.location.href='manage_categories.php?action=add'">Add New Category</button>
+            </div>
         <?php elseif ($action == 'add' || $action == 'edit'): ?>
             <form action="manage_categories.php?action=<?php echo $action; ?><?php if ($id) echo '&id=' . $id; ?>" method="post">
                 <label for="category_name">Category Name:</label>
