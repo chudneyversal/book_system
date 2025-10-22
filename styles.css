@@ -54,6 +54,29 @@
     }
 }
 
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+
+
 /* Modern Design Enhancements with Custom Colors */
 body {
     font-family: 'Playfair Display', serif;
@@ -69,18 +92,22 @@ body {
 }
 
 header {
-    background: linear-gradient(135deg, #1E1E2E 0%, #3B3B58 100%);
+    background: linear-gradient(-45deg, #1E1E2E, #3B3B58, #2A2A40, #1E1E2E, #3B3B58);
+    background-size: 400% 400%;
     color: #E0AA3E;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     position: relative;
-    animation: slideInLeft 0.8s ease-out;
+    animation: slideInLeft 0.8s ease-out, gradientShift 8s ease-in-out infinite;
 }
 
 header h1 {
     margin: 0;
     font-size: 2.5em;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end);
 }
 
 header p {
