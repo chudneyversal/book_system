@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 // Fetch books with author and category
-$stmt = $pdo->query("SELECT b.BookID, b.Title, b.Price, b.Stock, a.Name AS Author, c.CategoryName FROM Books b JOIN Authors a ON b.AuthorID = a.AuthorID JOIN Categories c ON b.CategoryID = c.CategoryID");
+$stmt = $pdo->query("SELECT b.BookID, b.Title, b.Price, b.Stock, b.Image, a.Name AS Author, c.CategoryName FROM Books b JOIN Authors a ON b.AuthorID = a.AuthorID JOIN Categories c ON b.CategoryID = c.CategoryID");
 $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -60,6 +60,9 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <div class="books">
             <?php foreach ($books as $book): ?>
                 <div class="book">
+                    <?php if ($book['Image']): ?>
+                        <img src="<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>" style="max-width: 200px; height: auto;">
+                    <?php endif; ?>
                     <h3><?php echo htmlspecialchars($book['Title']); ?></h3>
                     <p>Author: <?php echo htmlspecialchars($book['Author']); ?></p>
                     <p>Category: <?php echo htmlspecialchars($book['CategoryName']); ?></p>
@@ -80,7 +83,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </main>
 
     <footer>
-        <p>&copy; 2025 Book Store</p>
+        <p>&copy; 2025, booksandpleased. </p>
     </footer>
 </body>
 </html>

@@ -38,28 +38,49 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p>Order placed successfully!</p>
         <?php endif; ?>
         <?php if ($orders): ?>
-            <?php foreach ($orders as $order): ?>
-                <div class="order">
-                    <h3>Order #<?php echo $order['OrderID']; ?> - <?php echo $order['OrderDate']; ?> - Status: <?php echo $order['Status']; ?> - Total: $<?php echo $order['TotalAmount']; ?></h3>
-                    <?php
-                    $stmt_items = $pdo->prepare("SELECT oi.*, b.Title FROM OrderItems oi JOIN Books b ON oi.BookID = b.BookID WHERE oi.OrderID = ?");
-                    $stmt_items->execute([$order['OrderID']]);
-                    $items = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
-                    ?>
-                    <ul>
-                        <?php foreach ($items as $item): ?>
-                            <li><?php echo htmlspecialchars($item['Title']); ?> - Quantity: <?php echo $item['Quantity']; ?> - Price: $<?php echo $item['Price']; ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endforeach; ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Order Time</th>
+                        <th>Status</th>
+                        <th>Total Amount</th>
+                        <th>Items</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($orders as $order): ?>
+                        <tr>
+                            <td><?php echo $order['OrderID']; ?></td>
+                            <?php $orderDateTime = new DateTime($order['OrderDate']); ?>
+                            <td><?php echo $orderDateTime->format('Y-m-d'); ?></td>
+                            <td><?php echo $orderDateTime->format('H:i:s'); ?></td>
+                            <td><?php echo $order['Status']; ?></td>
+                            <td>$<?php echo $order['TotalAmount']; ?></td>
+                            <td>
+                                <?php
+                                $stmt_items = $pdo->prepare("SELECT oi.*, b.Title FROM OrderItems oi JOIN Books b ON oi.BookID = b.BookID WHERE oi.OrderID = ?");
+                                $stmt_items->execute([$order['OrderID']]);
+                                $items = $stmt_items->fetchAll(PDO::FETCH_ASSOC);
+                                ?>
+                                <ul>
+                                    <?php foreach ($items as $item): ?>
+                                        <li><?php echo htmlspecialchars($item['Title']); ?> - Quantity: <?php echo $item['Quantity']; ?> - Price: $<?php echo $item['Price']; ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         <?php else: ?>
             <p>No orders yet.</p>
         <?php endif; ?>
     </main>
 
     <footer>
-        <p>&copy; 2025 Book Store</p>
+        <p>&copy; 2025, booksandpleased. </p>
     </footer>
 </body>
 </html>

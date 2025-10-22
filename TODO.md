@@ -1,5 +1,3 @@
-- [x] Add Font Awesome for icons
-- [x] Add icons to navigation links
-- [x] Add decorative background pattern to body
-- [x] Add glowing effects to buttons
-- [x] Add decorative borders to main content
+- [x] Add Image column to Books table in setup_db.php
+- [x] Update index.php to display book images
+- [x] Test image display on index.php

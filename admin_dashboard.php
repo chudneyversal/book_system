@@ -31,11 +31,12 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
             <button onclick="window.location.href='manage_books.php'">Manage Books</button>
             <button onclick="window.location.href='manage_authors.php'">Manage Authors</button>
             <button onclick="window.location.href='manage_categories.php'">Manage Categories</button>
+            <button onclick="window.location.href='manage_orders.php'">Manage Orders</button>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2025 Book Store </p>
+        <p>&copy; 2025, booksandpleased. </p>
     </footer>
 </body>
 </html>

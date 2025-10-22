@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS Books (
     Price DECIMAL(10, 2) NOT NULL,
     PublishedDate DATE,
     Stock INT DEFAULT 0,
+    Image VARCHAR(255),
     FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID),
     FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
 );
@@ -68,7 +69,12 @@ CREATE TABLE IF NOT EXISTS Reviews (
 try {
     $pdo->exec($sql);
     echo "Database tables created successfully.";
+    
+    // Add Image column to Books table if it doesn't exist
+    $alterSql = "ALTER TABLE Books ADD COLUMN Image VARCHAR(255);";
+    $pdo->exec($alterSql);
+    echo "Image column added to Books table.";
 } catch (PDOException $e) {
-    echo "Error creating tables: " . $e->getMessage();
+    echo "Error: " . $e->getMessage();
 }
 ?>
