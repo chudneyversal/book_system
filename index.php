@@ -40,7 +40,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php else: ?>
                 <a href="login.php">Login</a>
                 <a href="register.php">Register</a>
-                <a href="admin_dashboard.php">Admin</a>
+                <a href="admin_login.php">Admin</a>
             <?php endif; ?>
         </nav>
     </header>
