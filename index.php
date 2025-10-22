@@ -38,7 +38,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <header>
-        <h1>Welcome to the Book Store</h1>
+        <h1>Welcome to booksandpleased! Find your next favorite read.</h1>
         <?php if ($username): ?>
             <p>Hello, <?php echo htmlspecialchars($username); ?>! You are logged in.</p>
         <?php endif; ?>
