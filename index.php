@@ -2,6 +2,17 @@
 session_start();
 include 'config.php';
 
+// Fetch username if logged in
+$username = null;
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT Username FROM Users WHERE UserID = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($user) {
+        $username = $user['Username'];
+    }
+}
+
 // Fetch books with author and category
 $stmt = $pdo->query("SELECT b.BookID, b.Title, b.Price, b.Stock, a.Name AS Author, c.CategoryName FROM Books b JOIN Authors a ON b.AuthorID = a.AuthorID JOIN Categories c ON b.CategoryID = c.CategoryID");
 $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -18,6 +29,9 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <header>
         <h1>Welcome to the Book Store</h1>
+        <?php if ($username): ?>
+            <p>Hello, <?php echo htmlspecialchars($username); ?>! You are logged in.</p>
+        <?php endif; ?>
         <nav>
             <a href="index.php">Home</a>
             <?php if (isset($_SESSION['user_id'])): ?>

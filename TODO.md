@@ -1,0 +1,1 @@
+- [x] Update index.php to fetch the username from the database when user is logged in and display a greeting message in the header.
