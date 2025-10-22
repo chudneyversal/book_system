@@ -75,7 +75,7 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <label for="comment">Comment:</label>
+                    <label for="comment">How's your review? Feel free to add your feedbacks here:</label>
                     <textarea id="comment" name="comment"></textarea>
                     <button type="submit">Submit Review</button>
                 </form>

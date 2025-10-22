@@ -25,6 +25,16 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Store</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successMessages = document.querySelectorAll('.success-message');
+            successMessages.forEach(function(message) {
+                setTimeout(function() {
+                    message.style.display = 'none';
+                }, 60000); // 1 minute = 60000 milliseconds
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -62,7 +72,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <button type="submit">Add to Cart</button>
                     </form>
                     <?php if (isset($_GET['added']) && $_GET['added'] == $book['BookID']): ?>
-                        <p>This book has been added to cart successfully!</p>
+                        <p id="success-message-<?php echo $book['BookID']; ?>" class="success-message">This book has been added to cart successfully!</p>
                     <?php endif; ?>
                 </div>
             <?php endforeach; ?>
