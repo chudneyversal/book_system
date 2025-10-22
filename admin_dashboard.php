@@ -27,11 +27,11 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] != 'admin') {
 
     <main>
         <h2>Manage System</h2>
-        <ul>
-            <li><a href="manage_books.php">Manage Books</a></li>
-            <li><a href="manage_authors.php">Manage Authors</a></li>
-            <li><a href="manage_categories.php">Manage Categories</a></li>
-        </ul>
+        <div class="admin-buttons">
+            <button onclick="window.location.href='manage_books.php'">Manage Books</button>
+            <button onclick="window.location.href='manage_authors.php'">Manage Authors</button>
+            <button onclick="window.location.href='manage_categories.php'">Manage Categories</button>
+        </div>
     </main>
 
     <footer>
