@@ -61,13 +61,16 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <input type="number" name="quantity" value="1" min="1" max="<?php echo $book['Stock']; ?>">
                         <button type="submit">Add to Cart</button>
                     </form>
+                    <?php if (isset($_GET['added']) && $_GET['added'] == $book['BookID']): ?>
+                        <p>This book has been added to cart successfully!</p>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2023 Book Store</p>
+        <p>&copy; 2025 Book Store</p>
     </footer>
 </body>
 </html>

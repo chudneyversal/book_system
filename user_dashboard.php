@@ -29,7 +29,6 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <nav>
             <a href="index.php">Home</a>
             <a href="cart.php">Cart</a>
-            <a href="logout.php">Logout</a>
         </nav>
     </header>
 
@@ -60,7 +59,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </main>
 
     <footer>
-        <p>&copy; 2023 Book Store</p>
+        <p>&copy; 2025 Book Store</p>
     </footer>
 </body>
 </html>

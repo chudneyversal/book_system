@@ -91,7 +91,7 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
     </main>
 
     <footer>
-        <p>&copy; 2023 Book Store</p>
+        <p>&copy; 2025 Book Store</p>
     </footer>
 </body>
 </html>

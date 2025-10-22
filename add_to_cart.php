@@ -21,6 +21,6 @@ if ($book_id) {
     }
 }
 
-header('Location: cart.php');
+header('Location: index.php?added=' . $book_id);
 exit;
 ?>
