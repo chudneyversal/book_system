@@ -36,13 +36,10 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a href="index.php">Home</a>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <a href="user_dashboard.php">Dashboard</a>
-                <a href="cart.php">Cart</a>
                 <a href="logout.php">Logout</a>
             <?php else: ?>
                 <a href="login.php">Login</a>
                 <a href="register.php">Register</a>
-            <?php endif; ?>
-            <?php if (isset($_SESSION['user_id']) && $_SESSION['role'] == 'admin'): ?>
                 <a href="admin_dashboard.php">Admin</a>
             <?php endif; ?>
         </nav>

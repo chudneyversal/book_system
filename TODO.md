@@ -1,1 +1,1 @@
-- [x] Update index.php to fetch the username from the database when user is logged in and display a greeting message in the header.
+- [x] Move the admin link from the conditional nav block to the always-visible nav section in index.php, keeping it conditional on admin role.
