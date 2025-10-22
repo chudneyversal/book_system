@@ -18,7 +18,7 @@ $stmt = $pdo->query("SELECT b.BookID, b.Title, b.Price, b.Stock, b.Image, a.Name
 $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -61,7 +61,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($books as $book): ?>
                 <div class="book">
                     <?php if ($book['Image']): ?>
-                        <img src="<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>" style="max-width: 200px; height: auto;">
+                        <img src="images/<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>" style="max-width: 200px; height: auto;">
                     <?php endif; ?>
                     <h3><?php echo htmlspecialchars($book['Title']); ?></h3>
                     <p>Author: <?php echo htmlspecialchars($book['Author']); ?></p>

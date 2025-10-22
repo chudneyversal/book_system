@@ -33,7 +33,6 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <header>
-        <h1><?php echo htmlspecialchars($book['Title']); ?></h1>
         <nav>
             <a href="index.php">Home</a>
             <?php if (isset($_SESSION['user_id'])): ?>
@@ -47,19 +46,17 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
         </nav>
     </header>
 
-    <main>
+    <main class="book-detail-main">
         <div class="book-details">
+            <?php if ($book['Image']): ?>
+                <img src="images/<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>" style="max-width: 250px; height: auto; margin-bottom: 15px;">
+            <?php endif; ?>
             <h2><?php echo htmlspecialchars($book['Title']); ?></h2>
             <p>Author: <?php echo htmlspecialchars($book['Author']); ?></p>
             <p>Category: <?php echo htmlspecialchars($book['CategoryName']); ?></p>
             <p>Price: $<?php echo htmlspecialchars($book['Price']); ?></p>
             <p>Published: <?php echo htmlspecialchars($book['PublishedDate']); ?></p>
             <p>Stock: <?php echo htmlspecialchars($book['Stock']); ?></p>
-            <form action="add_to_cart.php" method="post">
-                <input type="hidden" name="book_id" value="<?php echo $book['BookID']; ?>">
-                <input type="number" name="quantity" value="1" min="1" max="<?php echo $book['Stock']; ?>">
-                <button type="submit">Add to Cart</button>
-            </form>
         </div>
 
         <div class="reviews">
@@ -91,7 +88,7 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
     </main>
 
     <footer>
-        <p>&copy; 2025 Book Store</p>
+        <p>&copy; 2025, booksandpleased. </p>
     </footer>
 </body>
 </html>

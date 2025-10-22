@@ -125,7 +125,7 @@ if ($action == 'edit' && $id) {
                 <button onclick="window.location.href='manage_books.php'">Back to List</button>
             </div>
         <?php endif; ?>
-    </main>
+    </main> 
 
     <footer>
         <p>&copy; 2025, booksandpleased. </p>
