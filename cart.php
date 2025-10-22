@@ -84,7 +84,7 @@ $total = array_sum(array_column($cart_items, 'total'));
                 </tbody>
             </table>
             <p>Total: $<?php echo $total; ?></p>
-            <a href="checkout.php">Proceed to Checkout</a>
+            <button onclick="window.location.href='checkout.php'">Proceed to Checkout</button>
         <?php else: ?>
             <p>Your cart is empty.</p>
         <?php endif; ?>
