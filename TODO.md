@@ -1,3 +1,3 @@
-# TODO for Book Details Review Display Update
+# TODO for Book Details Card Design
 
-- [x] Separate "Date & Time" into individual date and time lines in reviews
+- [x] Add design card styling to book details section to align with reviews section

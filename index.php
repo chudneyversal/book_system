@@ -59,7 +59,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <h2>Available Books</h2>
         <div class="books">
             <?php foreach ($books as $book): ?>
-                <div class="book">
+                <div class="book" onclick="window.location.href='book_details.php?id=<?php echo $book['BookID']; ?>'" style="cursor: pointer;">
                     <?php if ($book['Image']): ?>
                         <img src="images/<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>">
                     <?php endif; ?>
@@ -68,8 +68,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <p>Category: <?php echo htmlspecialchars($book['CategoryName']); ?></p>
                     <p>Price: $<?php echo htmlspecialchars($book['Price']); ?></p>
                     <p>Stock: <?php echo htmlspecialchars($book['Stock']); ?></p>
-                    <a href="book_details.php?id=<?php echo $book['BookID']; ?>">View Details</a>
-                    <form action="add_to_cart.php" method="post">
+                    <form action="add_to_cart.php" method="post" onclick="event.stopPropagation();">
                         <input type="hidden" name="book_id" value="<?php echo $book['BookID']; ?>">
                         <input type="number" name="quantity" value="1" min="1" max="<?php echo $book['Stock']; ?>">
                         <button type="submit">Add to Cart</button>

@@ -17,9 +17,17 @@ if (!$book) {
     exit;
 }
 
-// Fetch reviews
-$stmt_reviews = $pdo->prepare("SELECT r.*, u.Username FROM Reviews r JOIN Users u ON r.UserID = u.UserID WHERE r.BookID = ? ORDER BY r.ReviewDate DESC");
-$stmt_reviews->execute([$book_id]);
+// Fetch reviews, excluding the current user's review if logged in
+$user_id = $_SESSION['user_id'] ?? null;
+$query = "SELECT r.*, u.Username FROM Reviews r JOIN Users u ON r.UserID = u.UserID WHERE r.BookID = ?";
+$params = [$book_id];
+if ($user_id) {
+    $query .= " AND r.UserID != ?";
+    $params[] = $user_id;
+}
+$query .= " ORDER BY r.ReviewDate DESC";
+$stmt_reviews = $pdo->prepare($query);
+$stmt_reviews->execute($params);
 $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -48,6 +56,7 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
 
     <main class="book-detail-main">
         <div class="book-details">
+            <h3>Book Details</h3>
             <?php if ($book['Image']): ?>
                 <img src="images/<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>" style="max-width: 250px; height: auto; margin-bottom: 15px;">
             <?php endif; ?>
@@ -82,6 +91,17 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
                     <textarea id="comment" name="comment"><?php echo $user_review ? htmlspecialchars($user_review['Comment']) : ''; ?></textarea>
                     <button type="submit">Update Review</button>
                 </form>
+                <?php if ($user_review): ?>
+                    <div class="your-review">
+                        <h4>Your Review</h4>
+                        <div class="review">
+                            <p><strong>Rating:</strong> <?php echo $user_review['Rating']; ?>/5</p>
+                            <p><strong>Honest Review/Feedback:</strong> <?php echo htmlspecialchars($user_review['Comment']); ?></p>
+                            <p><strong>Date:</strong> <?php echo date('Y-m-d', strtotime($user_review['ReviewDate'])); ?></p>
+                            <p><strong>Time:</strong> <?php echo date('H:i:s', strtotime($user_review['ReviewDate'])); ?></p>
+                        </div>
+                    </div>
+                <?php endif; ?>
             <?php else: ?>
                 <p style="color: #E0AA3E; font-style: italic;">Login to add your review and share your thoughts!</p>
             <?php endif; ?>

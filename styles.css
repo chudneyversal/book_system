@@ -690,6 +690,11 @@ table td button:hover {
 .book-details {
     flex: 1;
     max-width: 400px;
+    background: linear-gradient(135deg, #3B3B58 0%, #1E1E2E 100%);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border: 2px solid rgba(224, 170, 62, 0.3);
 }
 
 .book-details img {
