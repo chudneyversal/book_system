@@ -100,14 +100,16 @@ $total = array_sum(array_column($cart_items, 'total'));
                                     </select>
                                 </td>
                                 <td>
-                                    <form id="update-form-<?php echo $item['id']; ?>" action="update_cart.php" method="post" style="display:inline;">
-                                        <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
-                                        <button type="submit">Update</button>
-                                    </form>
-                                    <form action="remove_from_cart.php" method="post" style="display:inline;">
-                                        <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
-                                        <button type="submit">Remove</button>
-                                    </form>
+                                    <div style="display: flex; gap: 5px; justify-content: center;">
+                                        <form id="update-form-<?php echo $item['id']; ?>" action="update_cart.php" method="post" style="display:inline;">
+                                            <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
+                                            <button type="submit" style="width: 80px;">Update</button>
+                                        </form>
+                                        <form action="remove_from_cart.php" method="post" style="display:inline;">
+                                            <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
+                                            <button type="submit" style="width: 80px;">Remove</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
