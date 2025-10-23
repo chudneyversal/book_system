@@ -58,7 +58,6 @@ $total = array_sum(array_column($cart_items, 'total'));
         <nav>
             <a href="index.php">Home</a>
             <a href="user_dashboard.php">Dashboard</a>
-            <a href="logout.php">Logout</a>
         </nav>
     </header>
 

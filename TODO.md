@@ -1,3 +1,3 @@
-# TODO for Book Details and Reviews Animation
+# TODO for Remove Logout from Cart Nav
 
-- [x] Add slide-in animations to book details and reviews sections on book_details page
+- [x] Remove "Logout" link from nav in cart.php
