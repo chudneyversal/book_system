@@ -1,3 +1,3 @@
-# TODO for Book Details Card Design
+# TODO for Book Details and Reviews Animation
 
-- [x] Add design card styling to book details section to align with reviews section
+- [x] Add slide-in animations to book details and reviews sections on book_details page

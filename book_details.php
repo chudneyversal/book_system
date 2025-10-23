@@ -38,6 +38,77 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($book['Title']); ?></title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        #imageModal {
+            animation: modalFadeIn 0.5s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        #modalImage {
+            animation: imageZoomIn 0.5s ease-out;
+        }
+
+        @keyframes imageZoomIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .book-details img:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+
+        .book-details img:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+
+        .book-details {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .reviews {
+            animation: slideInRight 1s ease-out 0.5s both;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -46,7 +117,6 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
             <?php if (isset($_SESSION['user_id'])): ?>
                 <a href="user_dashboard.php">Dashboard</a>
                 <a href="cart.php">Cart</a>
-                <a href="logout.php">Logout</a>
             <?php else: ?>
                 <a href="login.php">Login</a>
                 <a href="register.php">Register</a>
@@ -58,7 +128,7 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
         <div class="book-details">
             <h3>Book Details</h3>
             <?php if ($book['Image']): ?>
-                <img src="images/<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>" style="max-width: 250px; height: auto; margin-bottom: 15px;">
+                <img src="images/<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>" style="max-width: 250px; height: auto; margin-bottom: 15px; cursor: pointer;" onclick="openModal('images/<?php echo htmlspecialchars($book['Image']); ?>')">
             <?php endif; ?>
             <h2><?php echo htmlspecialchars($book['Title']); ?></h2>
             <p>Author: <?php echo htmlspecialchars($book['Author']); ?></p>
@@ -116,6 +186,30 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
             <?php endforeach; ?>
         </div>
     </main>
+
+    <!-- Modal for image enlargement -->
+    <div id="imageModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);">
+        <span style="position: absolute; top: 15px; right: 35px; color: #aaa; font-size: 40px; font-weight: bold; cursor: pointer;" onclick="closeModal()">&times;</span>
+        <img id="modalImage" style="margin: auto; display: block; max-width: 80%; max-height: 80%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    </div>
+
+    <script>
+        function openModal(src) {
+            document.getElementById('imageModal').style.display = 'block';
+            document.getElementById('modalImage').src = src;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the image
+        document.getElementById('imageModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+    </script>
 
     <footer>
         <p>&copy; 2025, booksandpleased. </p>

@@ -25,6 +25,22 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Store</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            animation: slideIn 1s ease-out;
+        }
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const successMessages = document.querySelectorAll('.success-message');
