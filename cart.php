@@ -63,50 +63,62 @@ $total = array_sum(array_column($cart_items, 'total'));
 
     <main>
         <?php if ($cart_items): ?>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>New Quantity</th>
-                        <th>Total Amount</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($cart_items as $item): ?>
+            <form action="checkout.php" method="post">
+                <table>
+                    <thead>
                         <tr>
-                            <td><?php echo htmlspecialchars($item['title']); ?></td>
-                            <td>$<?php echo htmlspecialchars($item['price']); ?></td>
-                            <td><?php echo htmlspecialchars($item['quantity']); ?></td>
-                            <td>
-                                <div class="quantity-controls">
-                                    <button type="button" class="quantity-btn" onclick="changeQuantity(<?php echo $item['id']; ?>, -1)">-</button>
-                                    <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="0" id="quantity-<?php echo $item['id']; ?>" form="update-form-<?php echo $item['id']; ?>" readonly>
-                                    <button type="button" class="quantity-btn" onclick="changeQuantity(<?php echo $item['id']; ?>, 1)">+</button>
-                                </div>
-                            </td>
-                            <td>$<?php echo htmlspecialchars($item['total']); ?></td>
-                            <td>
-                                <form id="update-form-<?php echo $item['id']; ?>" action="update_cart.php" method="post" style="display:inline;">
-                                    <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
-                                    <button type="submit">Update</button>
-                                </form>
-                                <form action="remove_from_cart.php" method="post" style="display:inline;">
-                                    <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
-                                    <button type="submit">Remove</button>
-                                </form>
-                            </td>
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>New Quantity</th>
+                            <th>Total Amount</th>
+                            <th>Payment Method</th>
+                            <th>Actions</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-            <div class="checkout-section">
-                <button class="checkout-btn" onclick="window.location.href='checkout.php'">
-                    <i class="fas fa-credit-card"></i> Proceed to Checkout
-                </button>
-            </div>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($cart_items as $item): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($item['title']); ?></td>
+                                <td>$<?php echo htmlspecialchars($item['price']); ?></td>
+                                <td><?php echo htmlspecialchars($item['quantity']); ?></td>
+                                <td>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="changeQuantity(<?php echo $item['id']; ?>, -1)">-</button>
+                                        <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="0" id="quantity-<?php echo $item['id']; ?>" form="update-form-<?php echo $item['id']; ?>" readonly>
+                                        <button type="button" class="quantity-btn" onclick="changeQuantity(<?php echo $item['id']; ?>, 1)">+</button>
+                                    </div>
+                                </td>
+                                <td>$<?php echo htmlspecialchars($item['total']); ?></td>
+                                <td>
+                                    <select name="payment_method[<?php echo $item['id']; ?>]" required>
+                                        <option value="">Select Payment Method</option>
+                                        <option value="credit_card">Credit Card</option>
+                                        <option value="debit_card">Debit Card</option>
+                                        <option value="paypal">PayPal</option>
+                                        <option value="bank_transfer">Bank Transfer</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <form id="update-form-<?php echo $item['id']; ?>" action="update_cart.php" method="post" style="display:inline;">
+                                        <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
+                                        <button type="submit">Update</button>
+                                    </form>
+                                    <form action="remove_from_cart.php" method="post" style="display:inline;">
+                                        <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
+                                        <button type="submit">Remove</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button type="submit" class="checkout-btn">
+                        <i class="fas fa-credit-card"></i> Proceed to Checkout
+                    </button>
+                </div>
+            </form>
         <?php else: ?>
             <p>Your cart is empty.</p>
         <?php endif; ?>

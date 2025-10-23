@@ -1,3 +1,3 @@
-# TODO for Reverting Review Buttons in book_details.php
+# TODO for Adding Payment Method to Cart Table
 
-- [x] Replace the two buttons ("Edit" and "Submit Review") with a single "Update Review" button in the review form
+- [x] Add a payment method selection in the cart table tfoot, right after the total amount, with functionality to submit to checkout.php
