@@ -1,3 +1,3 @@
-- [x] Add Image column to Books table in setup_db.php
-- [x] Update index.php to display book images
-- [x] Test image display on index.php
+# TODO for Book Details Review Display Update
+
+- [x] Separate "Date & Time" into individual date and time lines in reviews

@@ -80,7 +80,7 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
                     </select>
                     <label for="comment">How's your review? Feel free to add your feedbacks here:</label>
                     <textarea id="comment" name="comment"><?php echo $user_review ? htmlspecialchars($user_review['Comment']) : ''; ?></textarea>
-                    <button type="submit"><?php echo $user_review ? 'Update Review' : 'Submit Review'; ?></button>
+                    <button type="submit">Update Review</button>
                 </form>
             <?php else: ?>
                 <p style="color: #E0AA3E; font-style: italic;">Login to add your review and share your thoughts!</p>
@@ -90,7 +90,8 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
                     <p><strong>Reviewed by:</strong> <?php echo htmlspecialchars($review['Username']); ?></p>
                     <p><strong>Rating:</strong> <?php echo $review['Rating']; ?>/5</p>
                     <p><strong>Honest Review/Feedback:</strong> <?php echo htmlspecialchars($review['Comment']); ?></p>
-                    <p><strong>Date & Time:</strong> <?php echo $review['ReviewDate']; ?></p>
+                    <p><strong>Date:</strong> <?php echo date('Y-m-d', strtotime($review['ReviewDate'])); ?></p>
+                    <p><strong>Time:</strong> <?php echo date('H:i:s', strtotime($review['ReviewDate'])); ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
