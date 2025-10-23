@@ -9,8 +9,8 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch orders
-$stmt = $pdo->prepare("SELECT * FROM Orders WHERE UserID = ? ORDER BY OrderDate DESC");
+// Fetch orders (exclude cancelled ones)
+$stmt = $pdo->prepare("SELECT * FROM Orders WHERE UserID = ? AND Status != 'Cancelled' ORDER BY OrderDate DESC");
 $stmt->execute([$user_id]);
 $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -27,7 +27,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header>
         <h1>User Dashboard</h1>
         <nav>
-            <a href="index.php">Home</a>
+            <a href="index.php">&larr; Back to Home</a>
             <a href="cart.php">Cart</a>
         </nav>
     </header>
@@ -47,6 +47,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <th>Status</th>
                         <th>Total Amount</th>
                         <th>Items</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +70,14 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                         <li><?php echo htmlspecialchars($item['Title']); ?> - Quantity: <?php echo $item['Quantity']; ?> - Price: $<?php echo $item['Price']; ?></li>
                                     <?php endforeach; ?>
                                 </ul>
+                            </td>
+                            <td>
+                                <?php if ($order['Status'] != 'Cancelled' && $order['Status'] != 'Shipped'): ?>
+                                    <form action="cancel_order.php" method="post" style="display:inline;">
+                                        <input type="hidden" name="order_id" value="<?php echo $order['OrderID']; ?>">
+                                        <button type="submit" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel Order</button>
+                                    </form>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

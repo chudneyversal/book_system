@@ -113,7 +113,7 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <header>
         <nav>
-            <a href="index.php">Home</a>
+            <a href="index.php">&larr; Back to Home</a>
             <?php if (isset($_SESSION['user_id'])): ?>
                 <a href="user_dashboard.php">Dashboard</a>
                 <a href="cart.php">Cart</a>

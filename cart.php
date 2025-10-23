@@ -56,8 +56,8 @@ $total = array_sum(array_column($cart_items, 'total'));
     <header>
         <h1>Shopping Cart</h1>
         <nav>
-            <a href="index.php">Home</a>
-            <a href="user_dashboard.php">Dashboard</a>
+            <a href="index.php">&larr; Back to Home</a>
+            <a href="user_dashboard.php">Back to Dashboard</a>
         </nav>
     </header>
 
