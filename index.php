@@ -18,7 +18,7 @@ $stmt = $pdo->query("SELECT b.BookID, b.Title, b.Price, b.Stock, b.Image, a.Name
 $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!DOCTYPE html> 
+<!DOCTYPE html  > 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -40,7 +40,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <header>
         <h1>Welcome to booksandpleased! Find your next favorite read.</h1>
         <?php if ($username): ?>
-            <p>Hello, <?php echo htmlspecialchars($username); ?>! You are logged in.</p>
+            <p class="welcome-message">Hello, <?php echo htmlspecialchars($username); ?>! You are logged in.</p>
         <?php endif; ?>
         <nav>
             <a href="index.php">Home</a>
