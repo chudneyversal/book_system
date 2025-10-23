@@ -62,26 +62,35 @@ $reviews = $stmt_reviews->fetchAll(PDO::FETCH_ASSOC);
         <div class="reviews">
             <h3>Reviews</h3>
             <?php if (isset($_SESSION['user_id'])): ?>
+                <?php
+                // Check if user already has a review for this book
+                $user_review_stmt = $pdo->prepare("SELECT * FROM Reviews WHERE BookID = ? AND UserID = ?");
+                $user_review_stmt->execute([$book_id, $_SESSION['user_id']]);
+                $user_review = $user_review_stmt->fetch(PDO::FETCH_ASSOC);
+                ?>
                 <form action="add_review.php" method="post">
                     <input type="hidden" name="book_id" value="<?php echo $book['BookID']; ?>">
                     <label for="rating">Rating:</label>
                     <select id="rating" name="rating" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option value="1" <?php echo ($user_review && $user_review['Rating'] == 1) ? 'selected' : ''; ?>>1</option>
+                        <option value="2" <?php echo ($user_review && $user_review['Rating'] == 2) ? 'selected' : ''; ?>>2</option>
+                        <option value="3" <?php echo ($user_review && $user_review['Rating'] == 3) ? 'selected' : ''; ?>>3</option>
+                        <option value="4" <?php echo ($user_review && $user_review['Rating'] == 4) ? 'selected' : ''; ?>>4</option>
+                        <option value="5" <?php echo ($user_review && $user_review['Rating'] == 5) ? 'selected' : ''; ?>>5</option>
                     </select>
                     <label for="comment">How's your review? Feel free to add your feedbacks here:</label>
-                    <textarea id="comment" name="comment"></textarea>
-                    <button type="submit">Submit Review</button>
+                    <textarea id="comment" name="comment"><?php echo $user_review ? htmlspecialchars($user_review['Comment']) : ''; ?></textarea>
+                    <button type="submit"><?php echo $user_review ? 'Update Review' : 'Submit Review'; ?></button>
                 </form>
+            <?php else: ?>
+                <p style="color: #E0AA3E; font-style: italic;">Login to add your review and share your thoughts!</p>
             <?php endif; ?>
             <?php foreach ($reviews as $review): ?>
                 <div class="review">
-                    <p><strong><?php echo htmlspecialchars($review['Username']); ?></strong> (<?php echo $review['Rating']; ?>/5)</p>
-                    <p><?php echo htmlspecialchars($review['Comment']); ?></p>
-                    <p><?php echo $review['ReviewDate']; ?></p>
+                    <p><strong>Reviewed by:</strong> <?php echo htmlspecialchars($review['Username']); ?></p>
+                    <p><strong>Rating:</strong> <?php echo $review['Rating']; ?>/5</p>
+                    <p><strong>Honest Review/Feedback:</strong> <?php echo htmlspecialchars($review['Comment']); ?></p>
+                    <p><strong>Date & Time:</strong> <?php echo $review['ReviewDate']; ?></p>
                 </div>
             <?php endforeach; ?>
         </div>

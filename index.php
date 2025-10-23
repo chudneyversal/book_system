@@ -61,7 +61,7 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($books as $book): ?>
                 <div class="book">
                     <?php if ($book['Image']): ?>
-                        <img src="images/<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>" style="max-width: 200px; height: auto;">
+                        <img src="images/<?php echo htmlspecialchars($book['Image']); ?>" alt="<?php echo htmlspecialchars($book['Title']); ?>">
                     <?php endif; ?>
                     <h3><?php echo htmlspecialchars($book['Title']); ?></h3>
                     <p>Author: <?php echo htmlspecialchars($book['Author']); ?></p>

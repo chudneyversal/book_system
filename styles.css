@@ -145,6 +145,15 @@
     }
 }
 
+@keyframes bookImageGlow {
+    0%, 100% {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3), 0 4px 8px rgba(224, 170, 62, 0.2);
+    }
+    50% {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3), 0 4px 8px rgba(224, 170, 62, 0.4), 0 0 20px rgba(224, 170, 62, 0.3);
+    }
+}
+
 
 
 /* Modern Design Enhancements with Custom Colors */
@@ -278,11 +287,16 @@ h2 {
     width: 100%;
     max-width: 200px;
     height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3), 0 4px 8px rgba(224, 170, 62, 0.2);
     margin-bottom: 15px;
-    transition: transform 0.3s ease;
+    transition: all 0.4s ease;
+    opacity: 0.95;
+    filter: brightness(1.05) contrast(1.1);
+    border: none;
+    box-sizing: border-box;
+    animation: bookImageGlow 3s ease-in-out infinite;
 }
 
 .book img:hover {
@@ -561,6 +575,107 @@ table td button {
 table td button:hover {
     background: linear-gradient(135deg, #3B3B58 0%, #1E1E2E 100%);
     transform: scale(1.05);
+}
+
+/* Cart-specific styles */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: linear-gradient(135deg, #E0AA3E 0%, #3B3B58 100%);
+    color: #1E1E2E;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.quantity-btn:hover {
+    background: linear-gradient(135deg, #3B3B58 0%, #1E1E2E 100%);
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.quantity-btn:active {
+    transform: scale(0.95);
+}
+
+.quantity-controls input[type="number"] {
+    width: 50px;
+    text-align: center;
+    border: 2px solid #E0AA3E;
+    border-radius: 5px;
+    background-color: #1E1E2E;
+    color: #E0AA3E;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #3B3B58 0%, #1E1E2E 100%);
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    animation: fadeIn 1s ease-out;
+}
+
+.total-amount h3 {
+    color: #E0AA3E;
+    font-size: 1.8em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.checkout-section {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.checkout-btn {
+    padding: 6px 12px;
+    margin: 2px;
+    background: linear-gradient(135deg, #E0AA3E 0%, #3B3B58 100%);
+    color: #1E1E2E;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkout-btn:hover {
+    background: linear-gradient(135deg, #3B3B58 0%, #1E1E2E 100%);
+    transform: scale(1.05);
+}
+
+.checkout-btn i {
+    font-size: 1em;
+}
+
+.checkout-btn:active {
+    transform: scale(0.95);
 }
 
 .book-detail-main {

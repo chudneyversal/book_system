@@ -38,6 +38,19 @@ $total = array_sum(array_column($cart_items, 'total'));
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        function changeQuantity(bookId, change) {
+            const quantityInput = document.getElementById('quantity-' + bookId);
+            let currentValue = parseInt(quantityInput.value);
+            let newValue = currentValue + change;
+
+            if (newValue < 0) {
+                newValue = 0;
+            }
+
+            quantityInput.value = newValue;
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -58,7 +71,7 @@ $total = array_sum(array_column($cart_items, 'total'));
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>New Quantity</th>
-                        <th>Total</th>
+                        <th>Total Amount</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -69,7 +82,11 @@ $total = array_sum(array_column($cart_items, 'total'));
                             <td>$<?php echo htmlspecialchars($item['price']); ?></td>
                             <td><?php echo htmlspecialchars($item['quantity']); ?></td>
                             <td>
-                                <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="0" form="update-form-<?php echo $item['id']; ?>">
+                                <div class="quantity-controls">
+                                    <button type="button" class="quantity-btn" onclick="changeQuantity(<?php echo $item['id']; ?>, -1)">-</button>
+                                    <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="0" id="quantity-<?php echo $item['id']; ?>" form="update-form-<?php echo $item['id']; ?>" readonly>
+                                    <button type="button" class="quantity-btn" onclick="changeQuantity(<?php echo $item['id']; ?>, 1)">+</button>
+                                </div>
                             </td>
                             <td>$<?php echo htmlspecialchars($item['total']); ?></td>
                             <td>
@@ -86,15 +103,18 @@ $total = array_sum(array_column($cart_items, 'total'));
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <p>Total: $<?php echo $total; ?></p>
-            <button onclick="window.location.href='checkout.php'">Proceed to Checkout</button>
+            <div class="checkout-section">
+                <button class="checkout-btn" onclick="window.location.href='checkout.php'">
+                    <i class="fas fa-credit-card"></i> Proceed to Checkout
+                </button>
+            </div>
         <?php else: ?>
             <p>Your cart is empty.</p>
         <?php endif; ?>
     </main>
 
     <footer>
-        <p>&copy; 2025 Book Store</p>
+        <p>&copy; 2025, booksandpleased. </p>
     </footer>
 </body>
 </html>
