@@ -93,16 +93,17 @@ $total = array_sum(array_column($cart_items, 'total'));
                                 <td>
                                     <select name="payment_method[<?php echo $item['id']; ?>]" required>
                                         <option value="">Select Payment Method</option>
-                                        <option value="credit_card">Credit Card</option>
-                                        <option value="debit_card">Debit Card</option>
-                                        <option value="paypal">PayPal</option>
-                                        <option value="bank_transfer">Bank Transfer</option>
+                                        <option value="credit_card" <?php echo (isset($_SESSION['payment_methods'][$item['id']]) && $_SESSION['payment_methods'][$item['id']] == 'credit_card') ? 'selected' : ''; ?>>Credit Card</option>
+                                        <option value="debit_card" <?php echo (isset($_SESSION['payment_methods'][$item['id']]) && $_SESSION['payment_methods'][$item['id']] == 'debit_card') ? 'selected' : ''; ?>>Debit Card</option>
+                                        <option value="paypal" <?php echo (isset($_SESSION['payment_methods'][$item['id']]) && $_SESSION['payment_methods'][$item['id']] == 'paypal') ? 'selected' : ''; ?>>PayPal</option>
+                                        <option value="bank_transfer" <?php echo (isset($_SESSION['payment_methods'][$item['id']]) && $_SESSION['payment_methods'][$item['id']] == 'bank_transfer') ? 'selected' : ''; ?>>Bank Transfer</option>
                                     </select>
                                 </td>
                                 <td>
                                     <div style="display: flex; gap: 5px; justify-content: center;">
                                         <form id="update-form-<?php echo $item['id']; ?>" action="update_cart.php" method="post" style="display:inline;">
                                             <input type="hidden" name="book_id" value="<?php echo $item['id']; ?>">
+                                            <input type="hidden" name="payment_method" value="<?php echo $_SESSION['payment_methods'][$item['id']] ?? ''; ?>">
                                             <button type="submit" style="width: 80px;">Update</button>
                                         </form>
                                         <form action="remove_from_cart.php" method="post" style="display:inline;">
@@ -111,7 +112,6 @@ $total = array_sum(array_column($cart_items, 'total'));
                                         </form>
                                     </div>
                                 </td>
-                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
