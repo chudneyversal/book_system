@@ -693,14 +693,13 @@ table td button:hover {
 }
 
 .book-details img {
-    display: inline-block;
+    display: block;
     width: 150px;
     height: 200px;
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    margin-right: 15px;
-    vertical-align: top;
+    margin: 0 auto 15px auto;
     transition: transform 0.3s ease;
 }
 
@@ -709,8 +708,7 @@ table td button:hover {
 }
 
 .book-details h2 {
-    display: inline-block;
-    vertical-align: top;
+    display: block;
     margin-top: 0;
     line-height: 1.2;
 }
